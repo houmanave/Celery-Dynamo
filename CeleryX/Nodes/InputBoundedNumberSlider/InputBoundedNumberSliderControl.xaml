@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="CeleryX.Nodes.InputBoundedNumberSlider.InputBoundedNumberSliderControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CeleryX.Nodes.InputBoundedNumberSlider"
+             xmlns:conv="clr-namespace:CeleryX.Converters"
+             mc:Ignorable="d" d:DesignWidth="400" Height="95">
+    <UserControl.Resources>
+        <conv:NumberStringConverter x:Key="NumStrConv" />
+        <conv:RadioButtonIntegerConverter x:Key="RadioButConv" />
+    </UserControl.Resources>
+    <Grid>
+        <Slider x:Name="slider" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Value="{Binding SliderValue, Mode=TwoWay}" Maximum="100" HorizontalAlignment="Left" Width="370"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="25" Margin="10,40,0,0" TextWrapping="Wrap" Text="{Binding LeftLimitValue}" VerticalAlignment="Top" Width="80"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Right" Height="25" Margin="0,40,10,0" TextWrapping="Wrap" Text="{Binding RightLimitValue}" VerticalAlignment="Top" Width="85" TextAlignment="Right"/>
+        <TextBlock x:Name="textBlock2" Height="25" Margin="95,40,100,0" TextWrapping="Wrap" Text="{Binding OutputValue}" VerticalAlignment="Top" TextAlignment="Center" FontWeight="Bold"/>
+        <RadioButton x:Name="radioButton" Content="Integer" HorizontalAlignment="Left" Height="25" Margin="10,74,0,0" VerticalAlignment="Top" Width="65"
+                     IsChecked="{Binding OrNumberInteger, Converter={StaticResource RadioButConv}, ConverterParameter=1}"/>
+        <RadioButton x:Name="radioButton1" Content="Number" HorizontalAlignment="Left" Height="25" Margin="80,74,0,0" VerticalAlignment="Top" Width="70"
+                     IsChecked="{Binding OrNumberInteger, Converter={StaticResource RadioButConv}, ConverterParameter=0}"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="25" Margin="155,70,0,0" VerticalAlignment="Top" Width="45"
+                  ItemsSource="{Binding DicPrecisions}"
+                  DisplayMemberPath="Key"
+                  SelectedValuePath="Value"
+                  SelectedValue="{Binding Precision}"
+                  IsEnabled="{Binding IsNumber}"/>
+    </Grid>
+</UserControl>
