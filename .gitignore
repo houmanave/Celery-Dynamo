@@ -1,5 +1,7 @@
 #no bins
 CeleryX/bin
 CeleryX/obj
+CeleryX/.vs
 CeleryXFunctions/bin
 CeleryXFunctions/obj
+.vs/
