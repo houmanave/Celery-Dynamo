@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CeleryX.CommonControls
+namespace CeleryX.Nodes.Valve
 {
     /// <summary>
-    /// Interaction logic for CxMovablePointFree.xaml
+    /// ValveControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class CxMovablePointFree : Thumb
+    public partial class ValveControl : UserControl
     {
-        public CxMovablePointFree()
+        public ValveControl()
         {
             InitializeComponent();
         }

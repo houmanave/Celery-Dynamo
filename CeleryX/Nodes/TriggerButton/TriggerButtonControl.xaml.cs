@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CeleryX.CommonControls
+namespace CeleryX.Nodes.TriggerButton
 {
     /// <summary>
-    /// Interaction logic for CxMovablePointFree.xaml
+    /// TriggerButtonControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class CxMovablePointFree : Thumb
+    public partial class TriggerButtonControl : UserControl
     {
-        public CxMovablePointFree()
+        public TriggerButtonControl()
         {
             InitializeComponent();
         }

@@ -1,0 +1,17 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CeleryX.Nodes.Valve"
+             xmlns:Converters="clr-namespace:CeleryX.Converters" x:Class="CeleryX.Nodes.Valve.ValveControl"
+             mc:Ignorable="d" Height="35.484" Width="166.189">
+    <UserControl.Resources>
+        <Converters:RadioButtonIntegerConverter x:Key="RadioButtonIntegerConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <RadioButton Content="Close" HorizontalAlignment="Left" Height="18" Margin="10,10,0,0" VerticalAlignment="Top" Width="70" IsChecked="{Binding IsOpenClose, ConverterParameter=0, Converter={StaticResource RadioButtonIntegerConverter}}"/>
+        <RadioButton Content="Open" HorizontalAlignment="Right" Height="18" Margin="0,10,10,0" VerticalAlignment="Top" Width="70" IsChecked="{Binding IsOpenClose, ConverterParameter=1, Converter={StaticResource RadioButtonIntegerConverter}}"/>
+
+    </Grid>
+</UserControl>
