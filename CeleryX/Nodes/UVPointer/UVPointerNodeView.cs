@@ -38,9 +38,7 @@ namespace CeleryX.Nodes.UVPointer
                 model.CanvasHeight = theheight;
 
             //
-            model.pointMover = new CxControlPointFree(new System.Windows.Point(model.U, model.V));
-            model.pointMover.maxwidth = thewidth;
-            model.pointMover.maxheight = theheight;
+            model.pointMover = new CxControlPointFree(new System.Windows.Point(model.U, model.V), thewidth, theheight);
             Canvas.SetZIndex(model.pointMover, 75);
 
             model.CrossHairHorizontal = new Crosshair(control.thisCanvas, model.pointMover.Point, thewidth, theheight);

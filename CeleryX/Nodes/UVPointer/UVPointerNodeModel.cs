@@ -95,11 +95,7 @@ namespace CeleryX.Nodes.UVPointer
             MainControlHeight = 350.0;
             MainControlWidth = 350.0;
 
-            pointMover = new CxControlPointFree(new System.Windows.Point(U, V))
-            {
-                maxwidth = MainControlWidth,
-                maxheight = MainControlHeight
-            };
+            pointMover = new CxControlPointFree(new System.Windows.Point(U, V), MainControlWidth, MainControlHeight);
 
             //
             CanvasWidth = MainControlWidth;
@@ -128,11 +124,7 @@ namespace CeleryX.Nodes.UVPointer
             U = MainControlWidth * 0.5;
             V = MainControlHeight * 0.5;
 
-            pointMover = new CxControlPointFree(new System.Windows.Point(U, V))
-            {
-                maxwidth = CanvasWidth,
-                maxheight = CanvasHeight
-            };
+            pointMover = new CxControlPointFree(new System.Windows.Point(U, V), MainControlWidth, MainControlHeight);
 
             LayoutGridlines();
 

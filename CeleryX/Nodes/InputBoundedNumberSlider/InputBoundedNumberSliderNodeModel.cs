@@ -1,4 +1,5 @@
 ﻿using Dynamo.Engine;
+using Dynamo.Graph;
 using Dynamo.Graph.Nodes;
 using Newtonsoft.Json;
 using ProtoCore.AST.AssociativeAST;
@@ -9,6 +10,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace CeleryX.Nodes.InputBoundedNumberSlider
 {
@@ -43,6 +45,11 @@ namespace CeleryX.Nodes.InputBoundedNumberSlider
             {
                 _leftLimitValue = value;
                 RaisePropertyChanged("LeftLimitValue");
+
+                //UpdateOutputValue();
+
+                //  this function calls BuildOutputAST.
+                //OnNodeModified();
             }
         }
 
@@ -54,6 +61,11 @@ namespace CeleryX.Nodes.InputBoundedNumberSlider
             {
                 _rightLimitValue = value;
                 RaisePropertyChanged("RightLImitValue");
+
+                //UpdateOutputValue();
+
+                //  this function calls BuildOutputAST.
+                //OnNodeModified();
             }
         }
 
@@ -68,6 +80,7 @@ namespace CeleryX.Nodes.InputBoundedNumberSlider
 
                 UpdateOutputValue();
 
+                //  this function calls BuildOutputAST.
                 OnNodeModified();
             }
         }
@@ -94,6 +107,7 @@ namespace CeleryX.Nodes.InputBoundedNumberSlider
 
                 UpdateOutputValue();
 
+                //  this function calls BuildOutputAST.
                 OnNodeModified();
             }
         }
@@ -122,6 +136,7 @@ namespace CeleryX.Nodes.InputBoundedNumberSlider
 
                 UpdateOutputValue();
 
+                //  this function calls BuildOutputAST.
                 OnNodeModified();
             }
         }
@@ -272,21 +287,25 @@ namespace CeleryX.Nodes.InputBoundedNumberSlider
                 RightLimitValue = double.Parse(inputs[1].ToString());
 
                 UpdateOutputValue();
-
-                RaisePropertyChanged("DataUpdated");
             }
+
+            RaisePropertyChanged("DataUpdated");
         }
 
         public void ComputeOutput(EngineController engine)
         {
-            //
-            //if (IsUntriggerComputeOutput)
-            //{
-            //    IsUntriggerComputeOutput = false;
-            //    return;
-            //}
-            //
+            GetLeftAndRightLimitValues(engine);
 
+            if (InPorts[0].Connectors.Any() && InPorts[1].Connectors.Any())
+            {
+                UpdateOutputValue();
+
+                IsUntriggerComputeOutput = true;
+            }
+        }
+
+        private void GetLeftAndRightLimitValues(EngineController engine)
+        {
             if (InPorts[0].Connectors.Any() && InPorts[1].Connectors.Any())
             {
                 var minnode = InPorts[0].Connectors[0].Start.Owner;
@@ -317,16 +336,12 @@ namespace CeleryX.Nodes.InputBoundedNumberSlider
                     maxo = maxmirror.GetData().GetElements().Select(x => x.Data).FirstOrDefault();
                 }
                 else
-                { 
+                {
                     maxo = maxmirror.GetData().Data;
                 }
-                
+
                 LeftLimitValue = TryConvertToDouble(mino, out double parsed0) ? parsed0 : 0.0;
                 RightLimitValue = TryConvertToDouble(maxo, out double parsed1) ? parsed1 : 0.0;
-
-                UpdateOutputValue();
-
-                IsUntriggerComputeOutput = true;
             }
         }
 
@@ -339,11 +354,10 @@ namespace CeleryX.Nodes.InputBoundedNumberSlider
                     AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), AstFactory.BuildNullNode())
                 };
             }
-
-            //if (EngineController != null)
-            //{
-            //    ComputeOutput(EngineController);
-            //}
+            else if (EngineController != null)
+            {
+                GetLeftAndRightLimitValues(EngineController);
+            }
 
             var inputval0 = inputAstNodes[0];
             var inputval1 = inputAstNodes[1];
@@ -351,24 +365,29 @@ namespace CeleryX.Nodes.InputBoundedNumberSlider
             var dprecis = AstFactory.BuildIntNode(Precision);
             var dornumint = AstFactory.BuildIntNode(OrNumberInteger);
 
-            var functioncall = AstFactory.BuildFunctionCall<double, double, double, int, int, double>(CeleryXFunctions.InputBoundedNumberSliderCX.GetSliderOutputValue,
-                new List<AssociativeNode>
-                {
-                    inputval0,
-                    inputval1,
-                    sliderval,
-                    dprecis,
-                    dornumint
-                });
+            List<AssociativeNode> inputNodes = new List<AssociativeNode>
+            {
+                inputval0,
+                inputval1,
+                sliderval,
+                dprecis,
+                dornumint
+            };
+
+            var functioncall = AstFactory.BuildFunctionCall(
+                new Func<double, double, double, int, int, double>(CeleryXFunctions.InputBoundedNumberSliderCX.GetSliderOutputValue),
+                inputNodes);
 
             var outputvaluenode = AstFactory.BuildDoubleNode(OutputValue);
 
             return new[]
             {
                 //AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), outputvaluenode),
+                //AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), functioncall),
                 AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), functioncall),
                 AstFactory.BuildAssignment(
-                    AstFactory.BuildIdentifier(AstIdentifierBase + "_dummy"), VMDataBridge.DataBridge.GenerateBridgeDataAst(GUID.ToString(), AstFactory.BuildExprList(inputAstNodes)))
+                    AstFactory.BuildIdentifier(AstIdentifierBase + "_dummy"), VMDataBridge.DataBridge.GenerateBridgeDataAst(GUID.ToString(), AstFactory.BuildExprList(inputNodes))
+                    )
             };
         }
 

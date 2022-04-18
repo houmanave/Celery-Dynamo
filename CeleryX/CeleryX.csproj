@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CeleryXFunctions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CeleryXFunctions, Version=21.130.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\[Releases]\CeleryXFunctions.dll</HintPath>
     </Reference>
@@ -141,17 +141,30 @@
     <Compile Include="CommonControls\CxControlPointFree.xaml.cs">
       <DependentUpon>CxControlPointFree.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CommonControls\CxControlPointOrtho.xaml.cs">
+      <DependentUpon>CxControlPointOrtho.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CommonControls\CxMovablePointFree.xaml.cs">
       <DependentUpon>CxMovablePointFree.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CommonControls\Subcontrols\controlline.cs" />
     <Compile Include="CommonControls\Subcontrols\crosshair.cs" />
     <Compile Include="CommonControls\Subcontrols\curvebase.cs" />
+    <Compile Include="CommonControls\Subcontrols\curvebezier.cs" />
+    <Compile Include="CommonControls\Subcontrols\curvelinear.cs" />
     <Compile Include="CommonControls\Subcontrols\gridline.cs" />
     <Compile Include="CommonControls\Subcontrols\textbase.cs" />
     <Compile Include="CommonControls\Subcontrols\uvcoordtext.cs" />
+    <Compile Include="Converters\EnumGraphTypesConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\NumberStringConverter.cs" />
     <Compile Include="Converters\RadioButtonIntegerConverter.cs" />
+    <Compile Include="Converters\StringToPointThumbConverter.cs" />
+    <Compile Include="Nodes\GraphMap\GraphMapControl.xaml.cs">
+      <DependentUpon>GraphMapControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Nodes\GraphMap\GraphMapNodeModel.cs" />
+    <Compile Include="Nodes\GraphMap\GraphMapNodeView.cs" />
     <Compile Include="Nodes\InputBoundedNumberSlider\InputBoundedNumberSliderControl.xaml.cs">
       <DependentUpon>InputBoundedNumberSliderControl.xaml</DependentUpon>
     </Compile>
@@ -183,7 +196,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CommonControls\CxControlPointOrtho.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CommonControls\CxMovablePointFree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Nodes\GraphMap\GraphMapControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,6 +227,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(ProjectDir)..\[Releases]\Celery*.dll" "C:\Users\50501038\AppData\Roaming\Dynamo\Dynamo Revit\2.6\packages\Celery\bin"</PostBuildEvent>
+    <PostBuildEvent>copy /y "$(ProjectDir)..\[Releases]\Celery*.dll" "C:\Users\50501038\AppData\Roaming\Dynamo\Dynamo Core\2.14\packages\Celery\bin"</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -28,8 +28,8 @@ namespace CeleryX.CommonControls
         public Crosshair chairver { get; set; }
         public Uvcoordtext uvtext { get; set; }
 
-        public double maxwidth { get; set; }
-        public double maxheight { get; set; }
+        public double LimitWidth { get; set; }
+        public double LimitHeight { get; set; }
 
         private Point point;
         public Point Point
@@ -46,8 +46,12 @@ namespace CeleryX.CommonControls
                 Canvas.SetTop(this, point.Y - OFFSETVALUE);
             }
         }
+        public curvelinear curvelin { get; set; }
 
-        public CxControlPointFree(Point p)
+        public curvebezier curvebez { get; set; }
+        public controlline clinebez { get; set; }
+
+        public CxControlPointFree(Point p, double limitWidth, double limitHeight)
         {
             InitializeComponent();
 
@@ -55,6 +59,11 @@ namespace CeleryX.CommonControls
 
             Canvas.SetLeft(this, p.X - OFFSETVALUE);
             Canvas.SetTop(this, p.Y - OFFSETVALUE);
+
+            LimitWidth = limitWidth;
+            LimitHeight = limitHeight;
+
+            Canvas.SetZIndex(this, 10000);
         }
 
         private void Thumb_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
@@ -66,18 +75,18 @@ namespace CeleryX.CommonControls
             {
                 ehc = 0;
             }
-            else if (ehc > maxwidth)
+            else if (ehc > LimitWidth)
             {
-                ehc = maxwidth;
+                ehc = LimitWidth;
             }
 
             if (evc < 0)
             {
                 evc = 0;
             }
-            else if (evc > maxheight)
+            else if (evc > LimitHeight)
             {
-                evc = maxheight;
+                evc = LimitHeight;
             }
 
             Point = new Point(ehc, evc);
@@ -90,10 +99,18 @@ namespace CeleryX.CommonControls
             //    scurve.Regenerate(this);
             //}
 
-            //if (lcurve != null)
-            //{
-            //    lcurve.Regenerate(this);
-            //}
+            if (curvelin != null)
+            {
+                curvelin.Regenerate(this);
+            }
+            if (clinebez != null)
+            {
+                clinebez.Regenerate(this);
+            }
+            if (curvebez != null)
+            {
+                curvebez.Regenerate(this);
+            }
 
             //if (parabcurve != null)
             //{
@@ -134,44 +151,44 @@ namespace CeleryX.CommonControls
             return Point.X.ToString() + "," + Point.Y.ToString();
         }
 
-        public void Update(double ehc, double evc)
-        {
-            if (ehc < 0)
-            {
-                ehc = 0;
-            }
-            else if (ehc > maxwidth)
-            {
-                ehc = maxwidth;
-            }
+        //public void Update(double ehc, double evc)
+        //{
+        //    if (ehc < 0)
+        //    {
+        //        ehc = 0;
+        //    }
+        //    else if (ehc > LimitWidth)
+        //    {
+        //        ehc = LimitWidth;
+        //    }
 
-            if (evc < 0)
-            {
-                evc = 0;
-            }
-            else if (evc > maxheight)
-            {
-                evc = maxheight;
-            }
+        //    if (evc < 0)
+        //    {
+        //        evc = 0;
+        //    }
+        //    else if (evc > LimitHeight)
+        //    {
+        //        evc = LimitHeight;
+        //    }
 
-            Point = new Point(ehc, evc);
+        //    Point = new Point(ehc, evc);
 
-            Canvas.SetLeft(this, ehc - OFFSETVALUE);
-            Canvas.SetTop(this, evc - OFFSETVALUE);
+        //    Canvas.SetLeft(this, ehc - OFFSETVALUE);
+        //    Canvas.SetTop(this, evc - OFFSETVALUE);
 
-            //if (lcurve != null)
-            //{
-            //    lcurve.ReconfigureWidthAndHeight(maxwidth, maxheight);
-            //    lcurve.Regenerate(this);
-            //}
+        //    if (curvelin != null)
+        //    {
+        //        //curvelin.ReconfigureWidthAndHeight(LimitWidth, LimitHeight);
+        //        curvelin.Regenerate(this);
+        //    }
 
-            //if (scurve != null)
-            //{
-            //    scurve.Regenerate(this);
-            //    double maxv = 0.0;
-            //    double minv = 0.0;
-            //    scurve.GetMaximumMinimumOrdinates(maxheight, out minv, out maxv);
-            //}
-        }
+        //    //if (scurve != null)
+        //    //{
+        //    //    scurve.Regenerate(this);
+        //    //    double maxv = 0.0;
+        //    //    double minv = 0.0;
+        //    //    scurve.GetMaximumMinimumOrdinates(maxheight, out minv, out maxv);
+        //    //}
+        //}
     }
 }

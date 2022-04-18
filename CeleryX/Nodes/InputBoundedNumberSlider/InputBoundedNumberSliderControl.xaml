@@ -6,16 +6,16 @@
              xmlns:local="clr-namespace:CeleryX.Nodes.InputBoundedNumberSlider"
              xmlns:conv="clr-namespace:CeleryX.Converters"
              xmlns:CommonControls="clr-namespace:CeleryX.CommonControls" x:Class="CeleryX.Nodes.InputBoundedNumberSlider.InputBoundedNumberSliderControl"
-             mc:Ignorable="d" d:DesignWidth="400" Height="95">
+             mc:Ignorable="d" d:DesignWidth="300" Height="95" Width="300" MinHeight="95" MinWidth="300">
     <UserControl.Resources>
         <conv:NumberStringConverter x:Key="NumStrConv" />
         <conv:RadioButtonIntegerConverter x:Key="RadioButConv" />
     </UserControl.Resources>
     <Grid>
-        <Slider x:Name="slider" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Value="{Binding SliderValue, Mode=TwoWay}" Maximum="100" HorizontalAlignment="Left" Width="370"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="25" Margin="10,40,0,0" TextWrapping="Wrap" Text="{Binding LeftLimitValue}" VerticalAlignment="Top" Width="80"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Right" Height="25" Margin="0,40,10,0" TextWrapping="Wrap" Text="{Binding RightLimitValue}" VerticalAlignment="Top" Width="85" TextAlignment="Right"/>
-        <TextBlock x:Name="textBlock2" Height="25" Margin="95,40,100,0" TextWrapping="Wrap" Text="{Binding OutputValue}" VerticalAlignment="Top" TextAlignment="Center" FontWeight="Bold"/>
+        <Slider x:Name="slider" Height="25" Margin="10,10,20,0" VerticalAlignment="Top" Value="{Binding SliderValue, Mode=TwoWay}" Maximum="100"/>
+        <TextBlock x:Name="tbLeftLimit" HorizontalAlignment="Left" Height="25" Margin="10,40,0,0" TextWrapping="Wrap" Text="{Binding LeftLimitValue}" VerticalAlignment="Top" Width="80"/>
+        <TextBlock x:Name="tbSliderVal" HorizontalAlignment="Right" Height="25" Margin="0,40,10,0" TextWrapping="Wrap" Text="{Binding RightLimitValue}" VerticalAlignment="Top" Width="85" TextAlignment="Right"/>
+        <TextBlock x:Name="tbRightLimit" Height="25" Margin="95,40,100,0" TextWrapping="Wrap" Text="{Binding OutputValue}" VerticalAlignment="Top" TextAlignment="Center" FontWeight="Bold"/>
         <RadioButton x:Name="radioButton" Content="Integer" HorizontalAlignment="Left" Height="25" Margin="10,74,0,0" VerticalAlignment="Top" Width="65"
                      IsChecked="{Binding OrNumberInteger, ConverterParameter=1, Converter={StaticResource RadioButConv}}"/>
         <RadioButton x:Name="radioButton1" Content="Number" HorizontalAlignment="Left" Height="25" Margin="80,74,0,0" VerticalAlignment="Top" Width="70"
@@ -26,6 +26,6 @@
                   SelectedValuePath="Value"
                   SelectedValue="{Binding Precision}"
                   IsEnabled="{Binding IsNumber}"/>
-        <CommonControls:CxMovablePointFree HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <CommonControls:CxMovablePointFree HorizontalAlignment="Right" VerticalAlignment="Bottom" DragDelta="CxMovablePointFree_DragDelta"/>
     </Grid>
 </UserControl>

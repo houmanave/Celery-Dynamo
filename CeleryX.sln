@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1267
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeleryX", "CeleryX\CeleryX.csproj", "{1A40DCA2-3F0A-4955-B520-973E7B299F2D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{687D06D0-61D7-4972-AB3C-67B2DB2C7C3D} = {687D06D0-61D7-4972-AB3C-67B2DB2C7C3D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeleryXFunctions", "CeleryXFunctions\CeleryXFunctions.csproj", "{687D06D0-61D7-4972-AB3C-67B2DB2C7C3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A40DCA2-3F0A-4955-B520-973E7B299F2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A40DCA2-3F0A-4955-B520-973E7B299F2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A40DCA2-3F0A-4955-B520-973E7B299F2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A40DCA2-3F0A-4955-B520-973E7B299F2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687D06D0-61D7-4972-AB3C-67B2DB2C7C3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687D06D0-61D7-4972-AB3C-67B2DB2C7C3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687D06D0-61D7-4972-AB3C-67B2DB2C7C3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687D06D0-61D7-4972-AB3C-67B2DB2C7C3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4FFBD79C-3D25-42EE-8B32-63D2D773B87F}
+	EndGlobalSection
+EndGlobal

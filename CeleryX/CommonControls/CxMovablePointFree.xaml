@@ -4,12 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CeleryX.CommonControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="13" d:DesignWidth="13"
-       Name="ThMovPointFree" Background="White" Foreground="Black">
+             mc:Ignorable="d"
+       Name="ThMovPointFree" Background="White" Foreground="Black" Height="8" Width="8">
     <Thumb.Template>
         <ControlTemplate TargetType="Thumb">
-            <Ellipse Fill="#FFA4FFFB" HorizontalAlignment="Left" Height="13" Stroke="#FF535353" VerticalAlignment="Top" Width="13" StrokeThickness="2"/>
+            <Rectangle Fill="#FFFFF7E6" Stroke="Black" StrokeThickness="0.5"/>
         </ControlTemplate>
     </Thumb.Template>
 </Thumb>

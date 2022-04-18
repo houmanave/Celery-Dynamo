@@ -27,7 +27,7 @@ namespace CeleryX.Nodes.InputBoundedNumberSlider
             theModel = model;
             syncContext = new DispatcherSynchronizationContext(nodeView.Dispatcher);
 
-            theControl = new InputBoundedNumberSliderControl();
+            theControl = new InputBoundedNumberSliderControl(model);
             nodeView.inputGrid.Children.Add(theControl);
 
             theControl.DataContext = model;
@@ -43,11 +43,14 @@ namespace CeleryX.Nodes.InputBoundedNumberSlider
 
         private void ControlSliderValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
+            //  update values while scrolling.
+            UpdateVariableNumberSlider();
         }
 
         private void ControlSliderPreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            theModel.ComputeOutput(dynamoModel.EngineController);
+            //  update values upon pressing down the slider.
+            UpdateVariableNumberSlider();
         }
 
         private void ControlSliderPreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
